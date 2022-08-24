@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { LoaiGhe } from "../../enums/common";
 import "./index.scss";
 export default function Seat(props) {
   const [isSelected, setIsSelected] = useState(false);
   const ghe = props.item;
   const populateClass = () => {
     let defaultClass = "ghe";
-    if (ghe.loaiGhe === "Vip") {
+    if (ghe.loaiGhe === LoaiGhe.Vip) {
       defaultClass += " gheVip";
     }
     if (isSelected) {

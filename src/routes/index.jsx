@@ -1,16 +1,20 @@
-import React from "react";
+import React, { lazy } from "react";
 import { useRoutes } from "react-router-dom";
-import AdminGuard from "../guards/admin";
-import AuthGuard from "../guards/auth";
-import NoAuthGuard from "../guards/no-auth";
-import AdminLayout from "../layouts/adminLayout";
-import HomeLayout from "../layouts/home";
-import Booking from "../pages/booking/booking";
-import Home from "../pages/home/home";
-import Login from "../pages/login/login";
-import MovieDetail from "../pages/movie-detail/movie-detail";
-import MovieManagement from "../pages/movie-management/movie-management";
+const AdminGuard = lazy(() => import("../guards/admin"));
+const AuthGuard = lazy(() => import("../guards/auth"));
+const NoAuthGuard = lazy(() => import("../guards/no-auth"));
+const AdminLayout = lazy(() => import("../layouts/adminLayout"));
+const Booking = lazy(() => import("pages/booking/booking"));
+const Login = lazy(() => import("pages/login/login"));
+const MovieManagement = lazy(() =>
+import("pages/movie-management/movie-management")
+);
 
+const UpdateMovie = lazy(() => import("pages/update-movie/update-movie"));
+const CreateMovie = lazy(() => import("pages/create-movie/create-movie"));
+const HomeLayout = lazy(() => import("../layouts/home"));
+const Home = lazy(() => import("pages/home/home"));
+const MovieDetail = lazy(() => import("pages/movie-detail/movie-detail"));
 export default function Router() {
   const routing = useRoutes([
     {
@@ -55,6 +59,14 @@ export default function Router() {
             {
               path: "/admin/movie-management",
               element: <MovieManagement />,
+            },
+            {
+              path: "/admin/movie-management/create",
+              element: <CreateMovie />,
+            },
+            {
+              path: "/admin/movie-management/:movieId/update",
+              element: <UpdateMovie />,
             },
           ],
         },

@@ -1,0 +1,4 @@
+- antd form validation:
+  - <Form.Item rules={[]}></Form.Item>
+    - rules: list of rules & messages
+    - validateTrigger: trigger validation onChange, onBlur...

@@ -1,0 +1,7 @@
+- Deploy CICD
+- lazy Loading
+- remaining folder in react-strucutre: hooks/style/utils/enum
+- custom Hooks -> useAsync 
+- custom paths (alias) -> jsconfig.json
+- npm install styled-components
+  - style js with scss/css syntax

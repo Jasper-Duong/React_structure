@@ -1,18 +1,28 @@
 import { Button } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import { LoadingContext } from "../../contexts/loading.context";
+import { useAsync } from "../../hooks/useAsync";
 import { fetchMovieListApi } from "../../services/movie";
 
 export default function MovieList() {
   const navigate = useNavigate();
-  const [movieList, setMovieList] = useState([]);
-  useEffect(() => {
-    fetchMovieList();
-  }, []);
-  const fetchMovieList = async () => {
-    const result = await fetchMovieListApi();
-    setMovieList(result.data.content);
-  };
+  // const [movieList, setMovieList] = useState([]);
+  // const [_, setLoadingState] = useContext(LoadingContext);
+
+  const { state: movieList = [] } = useAsync({
+    service: fetchMovieListApi,
+  });
+  // useEffect(() => {
+  //   fetchMovieList();
+  // }, []);
+  // const fetchMovieList = async () => {
+  //   setLoadingState({ isLoading: true });
+  //   const result = await fetchMovieListApi();
+  //   setLoadingState({ isLoading: false });
+  //   setMovieList(result.data.content);
+  // };
+
   const renderMovieList = () => {
     return movieList.map((ele) => {
       return (
@@ -30,8 +40,8 @@ export default function MovieList() {
             <div className="card-body">
               <h5 className="card-title">{ele.tenPhim}</h5>
               <Button
-                size='large'
-                type='danger'
+                size="large"
+                type="danger"
                 onClick={() => navigate(`/movie/${ele.maPhim}`)}
               >
                 XEM CHI TIẾT
